@@ -22,9 +22,9 @@ export async function main(ns) {
 
     while ( true){
         if (totalHashes > 4 ){
-            ns.tprint(`Total Hashes = ${totalHashes}`)
+            // ns.tprint(`Total Hashes = ${totalHashes}`)
             ns.hacknet.spendHashes("Sell for Money","thisisneededforcount", 8) 
-        }
+        } else { return; }
 
         totalHashes = ns.hacknet.numHashes()
         await ns.sleep(100)

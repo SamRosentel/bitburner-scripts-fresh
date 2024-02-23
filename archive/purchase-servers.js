@@ -1,6 +1,6 @@
 /** @param {NS} ns */
 export async function main(ns) {
-  const filesToCopy = ["mid-hack-script.js", "hacker-helper.js"];
+  // const filesToCopy = ["mid-hack-script.js", "hacker-helper.js"];
   const serverLimit = ns.getPurchasedServerLimit();
 
   // inputs: number of servers to buy, ram per server
