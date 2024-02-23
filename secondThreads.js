@@ -23,7 +23,7 @@ export async function main(ns) {
     // set target to the input argument
     let target = ns.args[0]
 
-    ns.tprint(`Target server: ${target}.`)
+    // ns.tprint(`Target server: ${target}.`)
 
     let moneyThresh = ns.getServerMaxMoney(target) * 0.75;
     let securityThresh = ns.getServerMinSecurityLevel(target) + 5;
@@ -52,17 +52,17 @@ export async function main(ns) {
 
     if (ns.getServerSecurityLevel(target) > securityThresh) {
       // If the server's security level is above our threshold, weaken it
-      ns.tprint(`Weaken threads: ${weakenThreads} -- Weaken Time: ${formatTime(weakenTime)}`)
+      // ns.tprint(`Weaken threads: ${weakenThreads} -- Weaken Time: ${formatTime(weakenTime)}`)
       await RunScript(ns, weakenfile, weakenThreads, target);
       await ns.sleep(weakenTime);
     } else if (ns.getServerMoneyAvailable(target) < moneyThresh) {
       // If the server's money is less than our threshold, grow it
-      ns.tprint(`Grow threads: ${growThreads}  -- Grow Time: ${formatTime(growTime)}`)
+      // ns.tprint(`Grow threads: ${growThreads}  -- Grow Time: ${formatTime(growTime)}`)
       await RunScript(ns, growfile, growThreads, target);
       await ns.sleep(growTime);
     } else {
       // Otherwise, hack it
-      ns.tprint(`Hack threads: ${hackThreads}  -- Hack Time: ${formatTime(hackTime)}`)
+      // ns.tprint(`Hack threads: ${hackThreads}  -- Hack Time: ${formatTime(hackTime)}`)
       await RunScript(ns, hackfile, hackThreads, target);
       await ns.sleep(hackTime);
     }

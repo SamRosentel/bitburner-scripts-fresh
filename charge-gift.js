@@ -1,16 +1,17 @@
 /** @param {NS} ns */
 export async function main(ns) {
-  let fragments = ns.stanek.activeFragments()
 
-  while (true){
-    for (let i = 0; i < fragments.length; i++) {
-      let fragment = fragments[i]
-      // ns.tprint(`charging fragment: ${fragment.effect}`)
-      if (fragment.effect.search('djacent') == -1) {
-        for (let j = 0; j < 20; j++){
-          await ns.stanek.chargeFragment(fragment.x, fragment.y)
-        }
-      }
-    }
-  }
+  const homeMaxRam = ns.getServerMaxRam("home") - 32;
+  const scriptName = "gift-threads.js";
+  const ramPerThread = ns.getScriptRam(scriptName);
+
+  // if no arg passed in, default to 1
+  let threads = ns.args[0] ? ns.args[0] : 1;
+  let maxThreads = homeMaxRam/ramPerThread;
+
+  // take the lower of threads and max threads
+  threads = threads < maxThreads ? threads : maxThreads;
+
+  // run that many threads on server "home"
+  await ns.exec(scriptName, "home", threads);
 }
